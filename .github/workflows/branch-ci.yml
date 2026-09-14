@@ -23,8 +23,9 @@ jobs:
     name: Build AAPS
     runs-on: ubuntu-latest
     steps:
-      - name: Decode Secrets Keystore Set and Oauth2 to Env
-        run: |
+    - name: Decode Secrets Keystore Set and Oauth2 to Env
+      run: |
+        
           if [ -n "${{ secrets.KEYSTORE_SET }}" ]; then
             echo "🔐 Decoding KEYSTORE_SET..."
             DECODED=$(echo "${{ secrets.KEYSTORE_SET }}" | base64 -d)
