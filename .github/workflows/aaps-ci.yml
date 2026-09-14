@@ -1,4 +1,4 @@
-name: AAPS CI
+name: AAPS CI 2
 on:
   workflow_dispatch:
 jobs:
