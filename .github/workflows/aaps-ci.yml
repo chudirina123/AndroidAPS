@@ -348,18 +348,17 @@ jobs:
               cat /tmp/gdrive_response.json
               exit 1
             fi
+      - name: Upload APK to GitHub Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: AndroidAPS-Ready-APK
+          path: app/build/outputs/apk/**/*.apk
+          
+            
 
-            echo "✅ Uploaded: $NAME"
-          }
-
-          upload_to_gdrive "aaps-${VERSION}${VERSION_SUFFIX}.apk" "aaps-${VERSION}${VERSION_SUFFIX}.apk"
-          upload_to_gdrive "aaps-wear-${VERSION}${VERSION_SUFFIX}.apk" "aaps-wear-${VERSION}${VERSION_SUFFIX}.apk"
-
-          echo "🎉 APKs successfully uploaded to Google Drive!"
-
-  # Configuration: Threshold-based cleanup
-  # Clean up only occurs when total runs exceed: keep_runs + keep_threshold (e.g., 20 + 5 = 25)
-  cleanup:
+# Configuration: Threshold-based cleanup
+# Clean up only occurs when total runs exceed: keep_runs + keep_threshold (e.g., 20 + 5 = 25)
+cleanup:
     name: Cleanup Old Workflow Runs
     needs: build
     if: always()
