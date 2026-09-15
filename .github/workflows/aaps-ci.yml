@@ -16,13 +16,13 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
           cache: 'gradle'
-      - run: keytool -genkeypair -v -keystore multipart_keystore.jks -alias ${{ secrets.KEY_ALIAS }} -keyalg RSA -keysize 2048 -validity 10000 -storepass ${{ secrets.KEY_STORE_PASSWORD }} -keypass ${{ secrets.KEY_PASSWORD }} -dname "CN=AndroidAPS"
+      - run: keytool -genkeypair -v -keystore multipart_keystore.jks -alias androidapskey -keyalg RSA -keysize 2048 -validity 10000 -storepass 123456 -keypass 123456 -dname "CN=AndroidAPS"
       - run: ./gradlew assembleRelease
         env:
-          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
-          ANDROID_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          ANDROID_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          ANDROID_KEYSTORE_PASSWORD: 123456
+          ANDROID_KEY_ALIAS: androidapskey
+          ANDROID_KEY_PASSWORD: 123456
       - uses: actions/upload-artifact@v4
         with:
           name: AAPS-Ready-APK
-          path: app/build/outputs/apk/release/*.apk
+          path: app/build/outputs/apk/release/*.apk    
