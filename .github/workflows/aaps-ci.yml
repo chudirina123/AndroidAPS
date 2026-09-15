@@ -10,6 +10,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '21'
+          cache: 'gradle'
       - run: keytool -genkeypair -v -keystore multipart_keystore.jks -alias ${{ secrets.KEY_ALIAS }} -keyalg RSA -keysize 2048 -validity 10000 -storepass ${{ secrets.KEYSTORE_PASSWORD }} -keypass ${{ secrets.KEY_PASSWORD }} -dname "CN=AndroidAPS"
       - run: ./gradlew assembleRelease
         env:
